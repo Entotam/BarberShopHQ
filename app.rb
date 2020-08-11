@@ -8,7 +8,7 @@ set :database, { adapter: 'sqlite3', database: 'barbershop.db' }
 
 class Client < ActiveRecord::Base
 	validates :name, presence: true, length: { minimum: 3 }
-	validates :phone, presence: true
+	validates :phone, presence: true, numericality: true
 	validates :datestamp, presence: true
 	validates :color, presence: true
 end
@@ -34,7 +34,6 @@ get '/visit' do
 end
 
 post '/visit' do
-
 	@c = Client.new params[:client]
 	if @c.save
 		erb "Вы записались!"
@@ -72,5 +71,6 @@ get '/booking' do
 end
 
 get '/client/:id' do
+	@client = Client.find(params[:id])
 	erb :client
 end
