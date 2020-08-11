@@ -65,3 +65,12 @@ get '/barber/:id' do
 	@barber = Barber.find(params[:id])
 	erb :barber
 end
+
+get '/booking' do
+	@clients = Client.all
+	erb :booking
+end
+
+get '/client/:id' do
+	erb :client
+end
